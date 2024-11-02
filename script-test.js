@@ -6,7 +6,7 @@ let nhism = { id: 'rambo', rarelity:'', name: '', description: '', image: 'image
 let qnt = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/qnt.png' };
 let mixi = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/mixi.png' };
 
-let cards = [rambo, djchip, snake, jikey, nhism, qnt];
+let cards = [rambo, djchip, snake, jikey, nhism, qnt,mixi];
 
 let gridContainer = document.querySelector('.grid-container');
 const createCardsButton = document.getElementById('createCards');
