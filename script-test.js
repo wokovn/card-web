@@ -4,6 +4,7 @@ let snake = { id: 'rambo', rarelity:'', name: '', description: '', image: 'image
 let jikey = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/jikey.png' };
 let nhism = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/nhism.png' };
 let qnt = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/qnt.png' };
+let mixi = { id: 'rambo', rarelity:'', name: '', description: '', image: 'images/mixi.png' };
 
 let cards = [rambo, djchip, snake, jikey, nhism, qnt];
 
