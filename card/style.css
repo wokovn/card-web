@@ -1,0 +1,263 @@
+:root {
+    --cardWidth: 300px;
+    --cardHeight: 400px;
+    --cardDepth: 5px;
+    --halfWidth: calc(var(--cardWidth) / 2);
+    --halfHeight: calc(var(--cardHeight) / 2);
+    --halfDepth: calc(var(--cardDepth) / 2);
+  }
+
+  body {
+      margin: 0;
+      min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    touch-action: none;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .scene {
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    perspective: 1000px;
+    margin: 50px auto;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    cursor: grab;
+    transition: transform 0.1s ease-out;
+    transition: transform 0.3s ease;
+  }
+
+  .card.flipped {
+    transform: rotateY(180deg); /* Rotate 180 degrees to show back */
+}
+
+  .card:active {
+    cursor: grabbing;
+  }
+
+  .card__face {
+    width: var(--cardDepth);
+    height: 100%;
+    background: #ddd;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+
+  .back-img,
+  .front-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    pointer-events: none;
+    cursor: not-allowed;
+    user-select: none;  /* Prevent text selection on images */
+    -webkit-user-drag: none; /* Prevent dragging in WebKit browsers */
+    -khtml-user-drag: none; /* Prevent dragging in Konqueror */
+    -moz-user-drag: none; /* Prevent dragging in Firefox */
+    -o-user-drag: none; /* Prevent dragging in Opera */
+   pointer-events: none; /* Prevent all mouse events on the images */
+  }
+
+  .back-img {
+    border: 10px solid transparent;
+    box-sizing: border-box;
+    background-clip: padding-box;
+  }
+
+  .card__face--front,
+  .card__face--back {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card__face--front {
+    transform: translateZ(calc(var(--halfDepth)));
+    background: linear-gradient(45deg, #ff6b6b, #ff8787);
+    color: white;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card__face--back {
+    transform: rotateY(180deg) translateZ(calc(var(--halfDepth)))
+    translateY(calc(-1 * var(--cardHeight)));
+    background: linear-gradient(45deg, #ffffff, #ffffff);
+    color: white;
+    backface-visibility: visible;
+  }
+
+  .card__face--left {
+    transform-origin: left;
+    transform: rotateY(-90deg) translateX(calc(-1 * var(--halfDepth)))
+      translateY(calc(-0 * var(--cardHeight)));
+    left: 0;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .card__face--right {
+    transform-origin: right;
+    transform: rotateY(90deg) translateX(calc(var(--halfDepth))) 
+      translateY(calc(-0 * var(--cardHeight)));
+    right: 0;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .card__face--top,
+  .card__face--bottom {
+    width: 100%;
+    height: var(--cardDepth);
+    background: #bbb;
+  }
+
+  .card__face--top {
+    transform-origin: top;
+    transform: rotateX(90deg) translateY(calc(-1 * var(--halfDepth)));
+    top: 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card__face--bottom {
+    transform-origin: bottom;
+    transform: rotateX(-90deg) translateY(calc(var(--halfDepth)));
+    bottom: 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Hiệu ứng holographic */
+  .card__face--front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      125deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.459) 30%,
+      rgba(227, 55, 215, 0.5) 50%,
+      rgba(255, 255, 255, 0.1) 70%,
+      transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: holographic 2.5s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Hiệu ứng sparkles */
+  .card__face--front::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 50% 50%, white 1%, transparent 1%),
+      radial-gradient(circle at 30% 20%, white 1%, transparent 1%),
+      radial-gradient(circle at 70% 30%, white 1%, transparent 1%),
+      radial-gradient(circle at 20% 60%, white 1%, transparent 1%),
+      radial-gradient(circle at 80% 70%, white 1%, transparent 1%);
+    background-size: 100% 100%;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    animation: sparkle 5s linear infinite;
+    pointer-events: none;
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 0, 0, 0.2),
+      rgba(0, 255, 0, 0.2),
+      rgba(0, 0, 255, 0.2)
+    );
+    mix-blend-mode: color;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .card:hover .gradient-overlay {
+    opacity: 1;
+  }
+
+  .instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Arial, sans-serif;
+    color: #666;
+    text-align: center;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    user-select: none;
+}
+
+#createCards { /* Style the button as needed */
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+  @keyframes holographic {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 200% 200%;
+    }
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
