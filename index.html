@@ -1,15 +1,56 @@
 <!DOCTYPE html>
+<!-- v2 -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>3D Card</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Card Collection</title>
+    <link rel="stylesheet" href="style-v2.css">
 </head>
 <body>
-  <button id="createCards">Create Cards</button>
-  <div class="grid-container">
-  </div>
+    <div class = "inventory-popup">
+        <div class = "inventory-popup-content">
+            <span class="close" style="cursor: pointer; display: inline;">&times;</span>
+            <h2 style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+                Inventory
+            </h2>
+            <div class = "inventory" style="margin-top: 40px;">
+                <div class ='card-holder'>
+                    <img src="images/1.png" class = "inventory-card">
+                </div>
+                <div class ='card-holder'>
+                    <img src="images/rambo.png" class = "inventory-card">
+                </div>
+                <div class ='card-holder'>
+                    <img src="images/nhism.png" class = "inventory-card">
+                </div>
+                <div class ='card-holder'>
+                    <img src="images/jikey.png" class = "inventory-card">
+                </div>
+                <div class ='card-holder'>
+                    <img src="images/qnt.png" class = "inventory-card">
+                </div>
+                <div class ='card-holder'>
+                    <img src="images/gif.gif" class = "inventory-card">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    </div>
+    <main>
+        <section id="gallery" class="section">
+            <div class="card-container"></div>
+        </section>
+    </main>
 
-  <script src="script-test.js"></script>
+    <div class="menu-bar">
+        <div class = 'menu-grid'>
+            <button id="createCards">Create Cards</button>
+            <button id="nextCard">Next Card</button>
+            <button id="inventoryButton">Open Inventory</button>
+        </div>
+    </div>
+
+    <script src="test-v2.js"></script>
 </body>
 </html>
