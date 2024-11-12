@@ -1,12 +1,13 @@
-let rambo = { id: 'rambo', rarity:'special', name: '', description: '', image: 'images/rambo.png' };
-let djchip = { id: 'rambo', rarity:'special', name: '', description: '', image: 'images/gif.gif' };
-let snake = { id: 'rambo', rarity:'special', name: '', description: '', image: 'images/snake.png' };
-let jikey = { id: 'rambo', rarity:'rare', name: '', description: '', image: 'images/jikey.png' };
-let nhism = { id: 'rambo', rarity:'normal', name: '', description: '', image: 'images/nhism.png' };
-let qnt = { id: 'rambo', rarity:'special', name: '', description: '', image: 'images/qnt.png' };
-let mixi = { id: 'rambo', rarity:'legendary', name: '', description: '', image: 'images/mixi.png' };
+let rambo = { id: 'rambo', rarity:'special', name: '', image: 'images/rambo.png' };
+let djchip = { id: 'djchip', rarity:'special', name: '', image: 'images/4000m.gif' };
+let snake = { id: 'snake', rarity:'special', name: '', image: 'images/snake.png' };
+let jikey = { id: 'jikey', rarity:'rare', name: '', image: 'images/jikey.png' };
+let nhism = { id: 'nhism', rarity:'normal', name: '', image: 'images/nhism.png' };
+let qnt = { id: 'qnt', rarity:'special', name: '', image: 'images/qnt.png' };
+let mixi = { id: 'mixi', rarity:'legendary', name: '', image: 'images/mixi.png' };
+let toi_muon_hi = { id: 'toi_muon_hi', rarity:'normal', name: '', image: 'images/toi_muon_hi.png' };
 
-let cards = [rambo, djchip, snake, jikey, nhism, qnt, mixi];
+let cards = [rambo, djchip, snake, jikey, nhism, qnt, mixi, toi_muon_hi];
 
 const createCardsButton = document.getElementById('createCards');
 const nextCardButton = document.getElementById('nextCard');
@@ -14,7 +15,10 @@ const cardContainer = document.querySelector('.card-container');
 const cardsElements = [];
 let currentCardIndex = 0;
 
+
+
 function createCard(info) {
+    
     const scene = document.createElement('div');
     scene.className = 'scene';
 
@@ -143,21 +147,22 @@ createCardsButton.addEventListener('click', () => {
         cardScene.style.transform = 'translateY(0)';
     }
 
+    saveCardsToLocalStorage();
     positionCards();
     updateButtonVisibility(); // Call the function to initially set button visibility
 });
 
 
 function positionCards() {
-    const offset = -30;
+    const offset = 30;
     cardsElements.forEach((card, index) => {
         card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
         card.style.opacity = 1;
         if (index <= currentCardIndex) {
-            card.style.transform = `translateY(${index * offset}px)`;
+            card.style.transform = `translateY(${index * offset}px) `;
             card.style.zIndex = cardsElements.length - index;
         } else {
-            card.style.transform = `translateY(${currentCardIndex * offset + offset}px)`;
+            card.style.transform = `translateX(${currentCardIndex * offset + offset}px)`;
             card.style.zIndex = 0;
         }
     });
@@ -226,5 +231,64 @@ function closeInventory() {
 }
 
 // Event listeners
-inventoryButton.addEventListener('click', openInventory);
+inventoryButton.addEventListener('click', () => {
+    openInventory();
+    displayInventory();
+});
 closePopup.addEventListener('click', closeInventory);
+
+function saveCardsToLocalStorage() {
+    let storedCards = JSON.parse(localStorage.getItem('cardsCollection')) || [];
+    for (let card of cards) {
+        let existingEntry = storedCards.find(item => item.card.id === card.id);
+        if (existingEntry) {
+            existingEntry.duplicateIndex += 1;
+        } else {
+            storedCards.push({ card: card, duplicateIndex: 1 });
+        }
+    }
+    localStorage.setItem('cardsCollection', JSON.stringify(storedCards));
+}
+
+function displayInventory() {
+    const inventoryPopupContent = document.querySelector('.inventory-cards-holder');
+    inventoryPopupContent.innerHTML = '';
+
+    let storedCards = JSON.parse(localStorage.getItem('cardsCollection')) || [];
+
+    const inventoryDiv = document.createElement('div');
+    inventoryDiv.className = 'inventory';
+    inventoryDiv.style.marginTop = '40px';
+
+    storedCards.forEach(item => {
+        const cardHolder = document.createElement('div');
+        cardHolder.className = `card-holder ${item.card.rarity}`;
+
+        const img = document.createElement('img');
+        img.src = item.card.image || 'images/1.png';
+        img.className = `inventory-card`;
+        const effect = document.createElement('div');
+        
+        cardHolder.appendChild(img);
+        
+
+        if (item.duplicateIndex > 1) {
+            const duplicateCircle = document.createElement('div');
+            duplicateCircle.className = 'duplicate-circle';
+            duplicateCircle.textContent = item.duplicateIndex;
+            cardHolder.appendChild(duplicateCircle);
+        }
+
+        inventoryDiv.appendChild(cardHolder);
+    });
+
+    inventoryPopupContent.appendChild(inventoryDiv);
+
+}
+
+document.querySelector('.ClearInventory').addEventListener('click', function() {
+    localStorage.removeItem('cardsCollection');
+    alert('Inventory cleared!');
+    displayInventory(); // Refresh the inventory display
+});
+

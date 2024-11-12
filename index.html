@@ -13,25 +13,16 @@
             <h2 style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
                 Inventory
             </h2>
-            <div class = "inventory" style="margin-top: 40px;">
-                <div class ='card-holder'>
-                    <img src="images/1.png" class = "inventory-card">
-                </div>
-                <div class ='card-holder'>
-                    <img src="images/rambo.png" class = "inventory-card">
-                </div>
-                <div class ='card-holder'>
-                    <img src="images/nhism.png" class = "inventory-card">
-                </div>
-                <div class ='card-holder'>
-                    <img src="images/jikey.png" class = "inventory-card">
-                </div>
-                <div class ='card-holder'>
-                    <img src="images/qnt.png" class = "inventory-card">
-                </div>
-                <div class ='card-holder'>
-                    <img src="images/gif.gif" class = "inventory-card">
-                </div>
+            <button class="ClearInventory" style="position: fixed; top: 10; left: 90%; transform: translateX(-50%); text-align: center;">
+                Clear Inventory
+            </button>
+            <script>
+                document.querySelector('ClearInventory').addEventListener('click', function() {
+                    localStorage.removeItem('cardsCollection');
+                    alert('Inventory cleared!');
+                });
+            </script>
+            <div class = "inventory-cards-holder" style="margin-top: 40px;">
                 
             </div>
         </div>
