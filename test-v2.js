@@ -1,13 +1,3 @@
-let rambo = { id: 'rambo', rarity:'special', name: '', image: 'images/rambo.png' };
-let djchip = { id: 'djchip', rarity:'special', name: '', image: 'images/4000m.gif' };
-let snake = { id: 'snake', rarity:'special', name: '', image: 'images/snake.png' };
-let jikey = { id: 'jikey', rarity:'rare', name: '', image: 'images/jikey.png' };
-let nhism = { id: 'nhism', rarity:'normal', name: '', image: 'images/nhism.png' };
-let qnt = { id: 'qnt', rarity:'special', name: '', image: 'images/qnt.png' };
-let mixi = { id: 'mixi', rarity:'legendary', name: '', image: 'images/mixi.png' };
-let toi_muon_hi = { id: 'toi_muon_hi', rarity:'normal', name: '', image: 'images/toi_muon_hi.png' };
-
-let cards = [rambo, djchip, snake, jikey, nhism, qnt, mixi, toi_muon_hi];
 
 const createCardsButton = document.getElementById('createCards');
 const nextCardButton = document.getElementById('nextCard');
@@ -15,7 +5,11 @@ const cardContainer = document.querySelector('.card-container');
 const cardsElements = [];
 let currentCardIndex = 0;
 
+const NORMAL = .75;
+const RARE = .90;
+const SPECIAL = .98;
 
+let cards = [];
 
 function createCard(info) {
     
@@ -29,7 +23,7 @@ function createCard(info) {
     front.className = info.rarity ? `card__face card__face--front ${info.rarity}` : 'card__face card__face--front normal';
     const frontImg = document.createElement('img');
     frontImg.className = 'front-img';
-    frontImg.src = info.image || 'images/1.png';
+    frontImg.src = `images/${info.rarity}/${info.image}` || 'images/1.png';
     frontImg.draggable = false; // Prevent image dragging
     front.appendChild(frontImg);
 
@@ -133,11 +127,46 @@ function createCard(info) {
 //     }
 // });
 
-createCardsButton.addEventListener('click', () => {
+
+async function loadCardData(filename) {
+    const response = await fetch(filename);
+    return response.json();
+}
+
+async function genCardArray(cards) {
+    cards = [];
+    const normalCards = await loadCardData('JSON/normal.json');
+    const rareCards = await loadCardData('JSON/rare.json');
+    const specialCards = await loadCardData('JSON/special.json');
+    const legendaryCards = await loadCardData('JSON/legendary.json');
+
+    console.log(normalCards);
+    console.log(rareCards);
+    console.log(specialCards);
+    console.log(legendaryCards);
+
+
+    for (let i = 0; i < 10; i++) {
+        let rate = Math.random();
+        if (rate <= NORMAL) {
+            cards[i] = normalCards[Math.floor(Math.random() * normalCards.length)];
+        } else if (rate > NORMAL && rate < RARE) {
+            cards[i] = rareCards[Math.floor(Math.random() * rareCards.length)];
+        } else if (rate >= RARE && rate < SPECIAL) {
+            cards[i] = specialCards[Math.floor(Math.random() * specialCards.length)];
+        } else {
+            cards[i] = legendaryCards[Math.floor(Math.random() * legendaryCards.length)];
+        }
+    }
+    console.log(cards);
+    return cards;
+}
+
+createCardsButton.addEventListener('click', async () => {
     cardContainer.innerHTML = '';
     cardsElements.length = 0;
     currentCardIndex = 0;
-
+    cards = await genCardArray(cards);
     for (let i = 0; i < cards.length; i++) {
         const cardScene = createCard(cards[i]);
         cardScene.classList.add('scene');
@@ -265,7 +294,7 @@ function displayInventory() {
         cardHolder.className = `card-holder ${item.card.rarity}`;
 
         const img = document.createElement('img');
-        img.src = item.card.image || 'images/1.png';
+        img.src = `images/${item.card.rarity}/${item.card.image}` || 'images/1.png';
         img.className = `inventory-card`;
         const effect = document.createElement('div');
         
