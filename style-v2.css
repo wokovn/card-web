@@ -619,16 +619,22 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
 }
+.inventory-popup-content-inner {
+  overflow-y: auto;
+  max-height: 90%;
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
 .inventory {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(8, 1fr);
+  padding: 10px 20px;
   gap: 10px;
   user-select: none;
   -webkit-user-drag: none;
   -moz-user-drag: none;
   -ms-user-drag: none;
-  overflow-y: auto;
+  overflow: hidden; /* Changed from overflow-y: auto to prevent scrolling */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
@@ -673,3 +679,14 @@ body {
   left: 80%;
 }
 
+.normal-cards .rare-cards .special-cards .legendary-cards
+{
+  display: none;
+}
+.inventory-text
+{
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px;
+}

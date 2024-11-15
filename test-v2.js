@@ -135,10 +135,10 @@ async function loadCardData(filename) {
 
 async function genCardArray(cards) {
     cards = [];
-    const normalCards = await loadCardData('JSON/normal.json');
-    const rareCards = await loadCardData('JSON/rare.json');
-    const specialCards = await loadCardData('JSON/special.json');
-    const legendaryCards = await loadCardData('JSON/legendary.json');
+    const normalCards = await loadCardData('json/normal.json');
+    const rareCards = await loadCardData('json/rare.json');
+    const specialCards = await loadCardData('json/special.json');
+    const legendaryCards = await loadCardData('json/legendary.json');
 
     console.log(normalCards);
     console.log(rareCards);
@@ -281,13 +281,22 @@ function saveCardsToLocalStorage() {
 
 function displayInventory() {
     const inventoryPopupContent = document.querySelector('.inventory-cards-holder');
-    inventoryPopupContent.innerHTML = '';
+    //inventoryPopupContent.innerHTML = '';
+    const normalGrid = document.querySelector(".inventory.normal-holder");
+    const rareGrid = document.querySelector(".inventory.rare-holder");
+    const specialGrid = document.querySelector(".inventory.special-holder");
+    const legendaryGrid = document.querySelector(".inventory.legendary-holder");
+
+    normalGrid.innerHTML = '';
+    rareGrid.innerHTML = '';   
+    specialGrid.innerHTML = '';
+    legendaryGrid.innerHTML = '';
 
     let storedCards = JSON.parse(localStorage.getItem('cardsCollection')) || [];
 
-    const inventoryDiv = document.createElement('div');
-    inventoryDiv.className = 'inventory';
-    inventoryDiv.style.marginTop = '40px';
+    // const inventoryDiv = document.createElement('div');
+    // inventoryDiv.className = 'inventory';
+    // inventoryDiv.style.marginTop = '40px';
 
     storedCards.forEach(item => {
         const cardHolder = document.createElement('div');
@@ -308,7 +317,16 @@ function displayInventory() {
             cardHolder.appendChild(duplicateCircle);
         }
 
-        inventoryDiv.appendChild(cardHolder);
+        //inventoryDiv.appendChild(cardHolder);
+        if(item.card.rarity == "normal") {
+            normalGrid.appendChild(cardHolder);
+        } else if(item.card.rarity == "rare") {
+            rareGrid.appendChild(cardHolder);
+        } else if(item.card.rarity == "special") {
+            specialGrid.appendChild(cardHolder);
+        } else if(item.card.rarity == "legendary") {
+            legendaryGrid.appendChild(cardHolder);
+        }
     });
 
     inventoryPopupContent.appendChild(inventoryDiv);
