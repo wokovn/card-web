@@ -10,7 +10,7 @@
     <div class = "inventory-popup">
         <div class = "inventory-popup-content">
             <span class="close" style="cursor: pointer; display: inline;">&times;</span>
-            <h2 style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); text-align: center;">
+            <h2 class="inventory-section" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); text-align: center;">
                 Inventory
             </h2>
             <button class="ClearInventory" style="position: fixed; top: 10; left: 90%; transform: translateX(-50%); text-align: center;">
@@ -24,26 +24,26 @@
             </script>
             <div class = "inventory-popup-content-inner">
                 <div class = "normal-cards">
-                    <h3 class = "inventory-text">Normal Cards</h3>
+                    <h3 class = "inventory-text normal-section">Normal Cards</h3>
                     <div class = "inventory normal-holder">
 
                     </div>
 
                 </div>
                 <div class = "rare-cards">
-                    <h3 class = "inventory-text">Rare Cards</h3>
+                    <h3 class = "inventory-text rare-section">Rare Cards</h3>
                     <div class = "inventory rare-holder">
 
                     </div>
                 </div>
                 <div class = "special-cards">
-                    <h3 class = "inventory-text">Special Cards</h3>
+                    <h3 class = "inventory-text special-section">Special Cards</h3>
                     <div class = "inventory special-holder">
 
                     </div>
                 </div>
-                <div class = "legendary-cards">
-                    <h3 class = "inventory-text">Legendary Cards</h3>
+                <div class = "legendary-cards ">
+                    <h3 class = "inventory-text legendary-section">Legendary Cards</h3>
                     <div class = "inventory legendary-holder">
 
                     </div>
@@ -60,12 +60,12 @@
 
     <div class="menu-bar">
         <div class = 'menu-grid'>
-            <button id="createCards">Create Cards</button>
-            <button id="nextCard">Next Card</button>
-            <button id="inventoryButton">Open Inventory</button>
+            <button id="inventoryButton">INVENTORY</button>
+            <button id="createCards">OPEN PACK</button>
+            <button id="nextCard">NEXT CARD</button>
         </div>
     </div>
 
-    <script src="test-v2.js"></script>
+    <script src="/scripts/app.js" type="module"></script>
 </body>
 </html>

@@ -10,6 +10,13 @@ const RARE = .90;
 const SPECIAL = .98;
 
 let cards = [];
+const swipeSound = [
+    new Audio('sound/next-1.mp3'),
+    new Audio('sound/next-2.mp3'),
+    new Audio('sound/next-3.mp3'),
+    new Audio('sound/next-4.mp3')
+];
+
 
 function createCard(info) {
     
@@ -133,17 +140,14 @@ async function loadCardData(filename) {
     return response.json();
 }
 
+let totalCards = 0, totalNormal = 0, totalRare = 0, totalSpecial = 0, totalLegendary = 0;
+
 async function genCardArray(cards) {
     cards = [];
     const normalCards = await loadCardData('json/normal.json');
     const rareCards = await loadCardData('json/rare.json');
     const specialCards = await loadCardData('json/special.json');
     const legendaryCards = await loadCardData('json/legendary.json');
-
-    console.log(normalCards);
-    console.log(rareCards);
-    console.log(specialCards);
-    console.log(legendaryCards);
 
 
     for (let i = 0; i < 10; i++) {
@@ -158,15 +162,28 @@ async function genCardArray(cards) {
             cards[i] = legendaryCards[Math.floor(Math.random() * legendaryCards.length)];
         }
     }
-    console.log(cards);
+
+    totalNormal = normalCards.length;
+    totalRare = rareCards.length;
+    totalSpecial = specialCards.length;
+    totalLegendary = legendaryCards.length;
+    totalCards = totalNormal + totalRare + totalSpecial + totalLegendary;
+
     return cards;
 }
 
+let isOnCooldown = false;
+
 createCardsButton.addEventListener('click', async () => {
+    if (isOnCooldown) return;
+    isOnCooldown = true;
+    createCardsButton.disabled = true;
+    
     cardContainer.innerHTML = '';
     cardsElements.length = 0;
     currentCardIndex = 0;
     cards = await genCardArray(cards);
+    
     for (let i = 0; i < cards.length; i++) {
         const cardScene = createCard(cards[i]);
         cardScene.classList.add('scene');
@@ -178,7 +195,13 @@ createCardsButton.addEventListener('click', async () => {
 
     saveCardsToLocalStorage();
     positionCards();
-    updateButtonVisibility(); // Call the function to initially set button visibility
+    updateButtonVisibility();
+
+    // Reset cooldown after 2 seconds
+    setTimeout(() => {
+        isOnCooldown = false;
+        createCardsButton.disabled = false;
+    }, 2000);
 });
 
 
@@ -197,12 +220,19 @@ function positionCards() {
     });
 }
 
+function playSwipeSound() {
+    const sound = swipeSound[Math.floor(Math.random() * swipeSound.length)];
+    sound.play();
+    console.log(`played sound: ${sound.src}`);
+}
 
 nextCardButton.addEventListener('click', () => {
+
     if (currentCardIndex < cardsElements.length) {
         const currentCard = cardsElements[currentCardIndex];
         currentCard.style.transform = `translateX(-100vw) translateY(50vw) scale(0.5)`;
         currentCard.style.opacity = 0;
+        playSwipeSound();
 
         setTimeout(() => {
             cardContainer.removeChild(currentCard);
@@ -279,6 +309,7 @@ function saveCardsToLocalStorage() {
     localStorage.setItem('cardsCollection', JSON.stringify(storedCards));
 }
 
+
 function displayInventory() {
     const inventoryPopupContent = document.querySelector('.inventory-cards-holder');
     //inventoryPopupContent.innerHTML = '';
@@ -286,6 +317,15 @@ function displayInventory() {
     const rareGrid = document.querySelector(".inventory.rare-holder");
     const specialGrid = document.querySelector(".inventory.special-holder");
     const legendaryGrid = document.querySelector(".inventory.legendary-holder");
+
+    const inventorySection = document.querySelector('.inventory-section');
+    const normalSection = document.querySelector('.normal-section');
+    const rareSection = document.querySelector('.rare-section');
+    const specialSection = document.querySelector('.special-section');
+    const legendarySection = document.querySelector('.legendary-section');
+
+    let collectedNormal = 0, collectedRare = 0, collectedSpecial = 0, collectedLegendary = 0;
+
 
     normalGrid.innerHTML = '';
     rareGrid.innerHTML = '';   
@@ -320,16 +360,25 @@ function displayInventory() {
         //inventoryDiv.appendChild(cardHolder);
         if(item.card.rarity == "normal") {
             normalGrid.appendChild(cardHolder);
+            collectedNormal++;
         } else if(item.card.rarity == "rare") {
             rareGrid.appendChild(cardHolder);
+            collectedRare++;
         } else if(item.card.rarity == "special") {
             specialGrid.appendChild(cardHolder);
+            collectedSpecial++;
         } else if(item.card.rarity == "legendary") {
             legendaryGrid.appendChild(cardHolder);
+            collectedLegendary++;
         }
     });
 
-    inventoryPopupContent.appendChild(inventoryDiv);
+    //inventoryPopupContent.appendChild(inventoryDiv);
+    inventorySection.innerHTML = `Total ${storedCards.length}/${totalCards}`;
+    normalSection.innerHTML = `Normal ${collectedNormal}/${totalNormal}`;
+    rareSection.innerHTML = `Rare ${collectedRare}/${totalRare}`;
+    specialSection.innerHTML = `Special ${collectedSpecial}/${totalSpecial}`;
+    legendarySection.innerHTML = `Legendary ${collectedLegendary}/${totalLegendary}`;
 
 }
 

@@ -19,6 +19,7 @@
 
   .card-container {
     position: relative;
+    margin: 50% 50%;
     width: var(--cardWidth);
     height: var(--cardHeight);
     background-color: transparent;
@@ -229,9 +230,28 @@
     opacity: 1;
   }
 
+  .menu-button { /* Style the button as needed */
+    background-color: transparent;
+    font-weight: bold; /* Màu vàng nhẹ, tạo cảm giác sang trọng */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-button:hover { /* Change the background color on mouse-over */
+    background-color: #4db1ec; /* Màu sáng hơn khi hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+  }
+
 #createCards { /* Style the button as needed */
-  background-color: #D4AF37; /* Màu vàng nhẹ, tạo cảm giác sang trọng */
-  color: #000;
+  background-color: transparent;
+  font-weight: bold; /* Màu vàng nhẹ, tạo cảm giác sang trọng */
+  color: #ffffff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -242,13 +262,14 @@
 }
 
 #createCards:hover { /* Change the background color on mouse-over */
-  background-color: #FFD700; /* Màu sáng hơn khi hover */
+  background-color: #4db1ec; /* Màu sáng hơn khi hover */
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
 }
 
 #nextCard {
-  background-color: #D4AF37; /* Màu vàng nhẹ, tạo cảm giác sang trọng */
-  color: #000;
+  background-color: transparent;
+  font-weight: bold; 
+  color: #ffffff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -259,17 +280,18 @@
 }
 
 #nextCard:hover { /* Change the background color on mouse-over */
-  background-color: #FFD700; /* Màu sáng hơn khi hover */
+  background-color: #4db1ec; /* Màu sáng hơn khi hover */
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
 }
 
 #inventoryButton{
-  position: absolute;
+  position: relative;
+  font-weight: bold;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  background-color: #38b715; 
-  color: #000;
+  background-color: transparent; 
+  color: #ffffff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -279,7 +301,7 @@
 }
 
 #inventoryButton:hover{
-  background-color: #62c447; /* Màu sáng hơn khi hover */
+  background-color: #4db1ec; /* Màu sáng hơn khi hover */
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
 }
 .menu 
@@ -573,7 +595,7 @@ body {
     bottom: 0;             /* Đặt ở đáy màn hình */
     left: 0;
     width: 100%;           /* Chiều rộng phủ hết màn hình */
-    height: 120px;          /* Độ cao của thanh điều hướng */
+    height: 15%;          /* Độ cao của thanh điều hướng */
     background: #333; /* Màu nền */
     display: flex;         /* Dùng flex để căn các mục đều nhau */
     justify-content: space-around; /* Khoảng cách đều giữa các mục */
@@ -581,7 +603,16 @@ body {
     color: white;
     border-top: 1px solid #555;       
 }
-
+.menu-grid
+{
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  padding: 10px;
+}
 .inventory-popup {
   position: fixed;
   top: 0;
