@@ -1,6 +1,6 @@
 [
-    { "id": "toi_muon_hi", "rarity": "normal", "name": "", "image": "toi_muon_hi.png" },
-    { "id": "nhism", "rarity": "normal", "name": "", "image": "nhism.png" },
-    { "id": "nuoc-xa-phong", "rarity": "normal", "name": "", "image": "nuoc-xa-phong.png" },
-    { "id": "thit-xao-hanh-tay", "rarity": "normal", "name": "", "image": "thit-xao-hanh-tay.png" }
+    { "id": "toi_muon_hi", "rarity": "normal", "name": "", "image": "toi_muon_hi.webp" },
+    { "id": "nhism", "rarity": "normal", "name": "", "image": "nhism.webp" },
+    { "id": "nuoc-xa-phong", "rarity": "normal", "name": "", "image": "nuoc-xa-phong.webp" },
+    { "id": "thit-xao-hanh-tay", "rarity": "normal", "name": "", "image": "thit-xao-hanh-tay.webp" }
 ]

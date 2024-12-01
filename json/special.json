@@ -1,7 +1,5 @@
 [
-    { "id": "4000m", "rarity": "special", "name": "", "image": "4000m.gif" },
-    { "id": "djchip", "rarity": "special", "name": "", "image": "djchip.png" },
-    { "id": "qnt", "rarity": "special", "name": "", "image": "qnt.png" },
-    { "id": "rambo", "rarity": "special", "name": "", "image": "rambo.png" },
-    { "id": "snake", "rarity": "special", "name": "", "image": "snake.png" }
+    { "id": "4000m", "rarity": "special", "name": "", "image": "4000m.webp" },
+    { "id": "voiper", "rarity": "special", "name": "", "image": "voiper.webp" },
+    { "id": "mixicup-mixi", "rarity": "special", "name": "", "image": "mixicup-mixi.webp" }
 ]

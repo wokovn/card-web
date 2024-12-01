@@ -387,4 +387,3 @@ document.querySelector('.ClearInventory').addEventListener('click', function() {
     alert('Inventory cleared!');
     displayInventory(); // Refresh the inventory display
 });
-

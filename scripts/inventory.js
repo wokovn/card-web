@@ -44,6 +44,7 @@ export function displayInventory(totalNormal, totalRare, totalSpecial, totalLege
         const img = document.createElement('img');
         img.src = `images/${item.card.rarity}/${item.card.image}` || 'images/1.png';
         img.className = `inventory-card`;
+        img.style.zIndex = "-1";
         const effect = document.createElement('div');
         
         cardHolder.appendChild(img);

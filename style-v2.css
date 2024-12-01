@@ -382,49 +382,26 @@
 /* Rare Card */
 .rare {
   position: relative;
-  background: linear-gradient(transparent 0%,
-    90deg,
-    #800080 0%,
-    #DA70D6 50%,
-    #800080 100%
-  );
-  background-size: 200% 100%;
-  animation: purpleGradient 3s linear infinite;
-}
-
-@keyframes purpleGradient {
-  0% {
-    background-position: 100% 0%;
-  }
-  100% {
-    background-position: -100% 0%;
-  }
+  background-blend-mode: lighten;
 }
 
 .rare::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(
     180deg,
-    transparent 0%,
-    rgba(123, 6, 119, 0.55) 45%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(150, 115, 149, 0.523) 55%,
-    transparent 100%
+    transparent 80%,
+    rgba(153, 50, 204, 0.4) 90%
   );
-  background-size: 300% 300%;
-  animation: purpleShine 2s linear infinite;
+  background-size: 100% 100%;
 }
 
-@keyframes purpleShine {
-  0% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
+
+/* Removed purpleGradient and purpleShine animations */
 
 /* Special Card */
 .special {
@@ -441,13 +418,13 @@
   background: linear-gradient(
     -180deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.459) 30%,
-    rgba(227, 55, 215, 0.5) 50%,
-    rgba(232, 45, 213, 0.751) 70%,
+    rgba(255, 255, 255, 0.459) 40%,
+    rgba(227, 55, 215, 0.5) 60%,
+    rgba(232, 45, 213, 0.751) 80%,
     transparent 100%
   );
   background-size: 200% 200%;
-  animation: holographic 5s linear infinite;
+  animation: holographic 2s cubic-bezier(0.455, 0.01, 0.515, 0.995) infinite;
   pointer-events: none;
 }
 
@@ -509,7 +486,7 @@
     transparent 100%
   );
   background-size: 200% 200%;
-  animation: goldShine 4s linear infinite;
+  animation: goldShine 2s ease-out infinite;
 }
 
 @keyframes goldShine {
