@@ -698,3 +698,34 @@ body {
   color: #333;
   margin: 10px;
 }
+
+@media(max-width: 1024px)
+{
+  .inventory
+  {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media(max-width: 768px)
+{
+  .inventory-popup-content
+  {
+    width: 95%;
+    height: 95%;
+  }
+  .inventory
+  {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+}
+
+@media(max-width: 425px)
+{
+  .inventory
+  {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
