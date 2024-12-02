@@ -1,4 +1,8 @@
 // --- inventory.js ---
+import {loadCardData } from './cardData.js';
+
+export let totalCards = 0, totalNormal = 0, totalRare = 0, totalSpecial = 0, totalLegendary = 0;
+
 export function saveCardsToLocalStorage(cards) {
     let storedCards = JSON.parse(localStorage.getItem('cardsCollection')) || [];
     for (let card of cards) {
@@ -12,8 +16,28 @@ export function saveCardsToLocalStorage(cards) {
     localStorage.setItem('cardsCollection', JSON.stringify(storedCards));
 }
 
+async function loadTotalCards()
+{
+    const normalCards = await loadCardData('json/normal.json');
+    const rareCards = await loadCardData('json/rare.json');
+    const specialCards = await loadCardData('json/special.json');
+    const legendaryCards = await loadCardData('json/legendary.json');
 
-export function displayInventory(totalNormal, totalRare, totalSpecial, totalLegendary, totalCards) {
+    totalNormal = normalCards.length;
+    totalRare = rareCards.length;
+    totalSpecial = specialCards.length;
+    totalLegendary = legendaryCards.length;
+    totalCards = totalNormal + totalRare + totalSpecial + totalLegendary;
+}
+
+export async function initialize() {
+    if (totalCards == 0) {
+        await loadTotalCards();
+    }
+    displayTotalCards();
+}
+
+export async function displayInventory(totalNormal, totalRare, totalSpecial, totalLegendary, totalCards) {
     const inventoryPopupContent = document.querySelector('.inventory-cards-holder');
     //inventoryPopupContent.innerHTML = '';
     const normalGrid = document.querySelector(".inventory.normal-holder");
@@ -29,7 +53,6 @@ export function displayInventory(totalNormal, totalRare, totalSpecial, totalLege
 
     let collectedNormal = 0, collectedRare = 0, collectedSpecial = 0, collectedLegendary = 0;
 
-
     normalGrid.innerHTML = '';
     rareGrid.innerHTML = '';
     specialGrid.innerHTML = '';
@@ -44,10 +67,40 @@ export function displayInventory(totalNormal, totalRare, totalSpecial, totalLege
         const img = document.createElement('img');
         img.src = `images/${item.card.rarity}/${item.card.image}` || 'images/1.png';
         img.className = `inventory-card`;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
         img.style.zIndex = "-1";
         const effect = document.createElement('div');
         
         cardHolder.appendChild(img);
+        cardHolder.addEventListener('click', () => {
+            const popup = document.createElement('div');
+            popup.className = 'image-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '0';
+            popup.style.left = '0';
+            popup.style.width = '100%';
+            popup.style.height = '100%';
+            popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            popup.style.display = 'flex';
+            popup.style.justifyContent = 'center';
+            popup.style.alignItems = 'center';
+            popup.style.zIndex = '1000';
+
+            const popupImage = document.createElement('img');
+            popupImage.src = img.src;
+            popupImage.style.width = '90%';
+            popupImage.style.height = '90%';
+            popupImage.style.objectFit = 'contain';
+
+            popup.appendChild(popupImage);
+            document.body.appendChild(popup);
+
+            popup.addEventListener('click', () => {
+            document.body.removeChild(popup);
+            });
+        });
         
 
         if (item.duplicateIndex > 1) {

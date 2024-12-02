@@ -1,10 +1,11 @@
 // --- cardData.js ---
+import { totalCards, totalNormal, totalLegendary, totalRare, totalSpecial } from "./inventory.js";
+
 export async function loadCardData(filename) {
     const response = await fetch(filename);
     return response.json();
 }
 
-export let totalCards = 0, totalNormal = 0, totalRare = 0, totalSpecial = 0, totalLegendary = 0;
 
 export const NORMAL = .75;
 export const RARE = .90;

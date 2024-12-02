@@ -1,6 +1,6 @@
 import { createCard } from './card.js';
-import { loadCardData, genCardArray, NORMAL, RARE, SPECIAL, totalCards, totalNormal, totalRare, totalSpecial, totalLegendary } from './cardData.js';
-import { saveCardsToLocalStorage, displayInventory } from './inventory.js';
+import { loadCardData, genCardArray, NORMAL, RARE, SPECIAL} from './cardData.js';
+import {  initialize, saveCardsToLocalStorage, displayInventory, totalCards, totalNormal, totalRare, totalSpecial, totalLegendary } from './inventory.js';
 
 const createCardsButton = document.getElementById('createCards');
 const nextCardButton = document.getElementById('nextCard');
@@ -25,6 +25,7 @@ const rarityOrder = {
 
 let isOnCooldown = false;
 let isNextCardOnCooldown = false;
+
 
 function addCardEventListeners(card) {
     let isDragging = false;
@@ -248,3 +249,5 @@ document.querySelector('.ClearInventory').addEventListener('click', function () 
     alert('Inventory cleared!');
     displayInventory(totalNormal, totalRare, totalSpecial, totalLegendary, totalCards);
 });
+
+initialize();
