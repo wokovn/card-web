@@ -59,6 +59,10 @@ function addCardEventListeners(card) {
             card.classList.add('flipped');
         }
         card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+        if (currentX < -50) {
+            nextCardButton.click();
+        }
     });
 
     card.addEventListener('dblclick', () => {
