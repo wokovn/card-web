@@ -5,9 +5,6 @@
     --halfWidth: calc(var(--cardWidth) / 2);
     --halfHeight: calc(var(--cardHeight) / 2);
     --halfDepth: calc(var(--cardDepth) / 2);
-    --screenHeight: 100vh;
-    --cardHeightPosition: calc(30% - var(--halfHeight));
-    --cardWidthPosition: calc(2/3 * var(--halfWidth));
   }
 
   body {
