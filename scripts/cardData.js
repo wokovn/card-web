@@ -41,11 +41,5 @@ export async function genCardArray() {
     // Sort cards by rarity
     cards.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
 
-    totalNormal = normalCards.length;
-    totalRare = rareCards.length;
-    totalSpecial = specialCards.length;
-    totalLegendary = legendaryCards.length;
-    totalCards = totalNormal + totalRare + totalSpecial + totalLegendary;
-
     return cards;
 }

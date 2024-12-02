@@ -34,7 +34,6 @@ export async function initialize() {
     if (totalCards == 0) {
         await loadTotalCards();
     }
-    displayTotalCards();
 }
 
 export async function displayInventory(totalNormal, totalRare, totalSpecial, totalLegendary, totalCards) {
