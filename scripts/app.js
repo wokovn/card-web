@@ -16,6 +16,13 @@ const swipeSound = [
     new Audio('sound/next-4.mp3')
 ];
 
+const rarityOrder = {
+    'normal': 1,
+    'rare': 2,
+    'special': 3,
+    'legendary': 4
+};
+
 let isOnCooldown = false;
 let isNextCardOnCooldown = false;
 
@@ -58,6 +65,38 @@ function addCardEventListeners(card) {
         isFlipped = !isFlipped;
         card.classList.toggle('flipped');
     });
+    
+card.addEventListener('touchstart', (e) => {
+    if (!card.classList.contains('top')) return;
+    isDragging = true;
+    startX = e.touches[0].pageX - currentX;
+    startY = e.touches[0].pageY - currentY;
+    card.style.cursor = 'grabbing';
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    currentX = e.touches[0].pageX - startX;
+    currentY = e.touches[0].pageY - startY;
+    card.style.transform = `rotateY(${currentX / 5}deg) rotateX(${-currentY / 5}deg)`;
+});
+
+document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    card.style.cursor = 'grab';
+    if (!isFlipped) {
+        isFlipped = true;
+        card.classList.add('flipped');
+    }
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+    // Check if swipe left
+    if (currentX < -50) {
+        nextCardButton.click();
+    }
+});
 }
 
 createCardsButton.addEventListener('click', async () => {
@@ -69,6 +108,8 @@ createCardsButton.addEventListener('click', async () => {
     cardsElements = [];
     currentCardIndex = 0;
     cards = await genCardArray();
+
+    cards.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
 
     for (let i = 0; i < cards.length; i++) {
         const { scene, card } = createCard(cards[i]);
@@ -125,8 +166,11 @@ function positionCards() {
 
 function playSwipeSound() {
     const sound = swipeSound[Math.floor(Math.random() * swipeSound.length)];
-    sound.currentTime = 0; // Reset the sound to the beginning for consecutive plays
-    sound.play();
+    sound.currentTime = 0;
+    sound.addEventListener('canplaythrough', () => {
+        sound.play();
+    }, { once: true });
+    sound.load();
 }
 
 nextCardButton.addEventListener('click', () => {
