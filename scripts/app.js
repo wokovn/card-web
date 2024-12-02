@@ -169,7 +169,7 @@ function positionCards() {
     });
 }
 
-function playSwipeSound() {
+async function playSwipeSound() {
     const sound = swipeSound[Math.floor(Math.random() * swipeSound.length)];
     sound.currentTime = 0;
     sound.addEventListener('canplaythrough', () => {

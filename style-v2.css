@@ -718,6 +718,10 @@ body {
     --cardHeight: 900px;
   }
 
+  .back-img{
+    border: 20px solid transparent;
+  }
+
   .inventory
   {
     grid-template-columns: repeat(5, 1fr);
@@ -730,6 +734,10 @@ body {
   :root{
     --cardWidth: 600px;
     --cardHeight: 900px;
+  }
+
+  .back-img{
+    border: 20px solid transparent;
   }
 
   .inventory-popup-content
