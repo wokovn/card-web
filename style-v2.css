@@ -5,6 +5,9 @@
     --halfWidth: calc(var(--cardWidth) / 2);
     --halfHeight: calc(var(--cardHeight) / 2);
     --halfDepth: calc(var(--cardDepth) / 2);
+    --screenHeight: 100vh;
+    --cardHeightPosition: calc(30% - var(--halfHeight));
+    --cardWidthPosition: calc(2/3 * var(--halfWidth));
   }
 
   body {
@@ -699,16 +702,34 @@ body {
   margin: 10px;
 }
 
-@media(max-width: 1024px)
+@media (max-height: 800px) and (max-width: 1024px){
+  :root{
+    --cardWidth: 300px;
+    --cardHeight: 450px;
+  }
+}
+
+@media(max-width: 1024px) and (min-height: 1200px)
 {
+  :root{
+    --cardWidth: 600px;
+    --cardHeight: 900px;
+  }
+
   .inventory
   {
     grid-template-columns: repeat(5, 1fr);
   }
+ 
 }
 
 @media(max-width: 768px)
 {
+  :root{
+    --cardWidth: 600px;
+    --cardHeight: 900px;
+  }
+
   .inventory-popup-content
   {
     width: 95%;
