@@ -1,4 +1,8 @@
 [
     { "id": "jikey", "rarity": "rare", "name": "", "image": "jikey.webp" },
-    { "id": "ngau-loi", "rarity": "rare", "name": "", "image": "ngau-loi.webp" }
+    { "id": "ngau-loi", "rarity": "rare", "name": "", "image": "ngau-loi.webp" },
+    { "id": "DRM_uremon", "rarity": "rare", "name": "", "image": "DRM_uremon.webp" },
+    { "id": "DRM_sunelinh", "rarity": "rare", "name": "", "image": "DRM_sunelinh.webp" },
+    { "id": "DRM_taikeysugi", "rarity": "rare", "name": "", "image": "DRM_taikeysugi.webp" },
+    { "id": "DRM_chaibo", "rarity": "rare", "name": "", "image": "DRM_chaibo.webp" }
 ]

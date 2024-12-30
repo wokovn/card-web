@@ -1,5 +1,6 @@
 [
     { "id": "4000m", "rarity": "special", "name": "", "image": "4000m.webp" },
     { "id": "voiper", "rarity": "special", "name": "", "image": "voiper.webp" },
-    { "id": "mixicup-mixi", "rarity": "special", "name": "", "image": "mixicup-mixi.webp" }
+    { "id": "mixicup-mixi", "rarity": "special", "name": "", "image": "mixicup-mixi.webp" },
+    { "id": "mixicup-nhism", "rarity": "special", "name": "", "image": "mixicup-nhism.webp" }
 ]

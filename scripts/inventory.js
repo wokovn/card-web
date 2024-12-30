@@ -59,6 +59,7 @@ export async function displayInventory(totalNormal, totalRare, totalSpecial, tot
 
     let storedCards = JSON.parse(localStorage.getItem('cardsCollection')) || [];
 
+    storedCards.sort((a, b) => a.card.id.localeCompare(b.card.id));
     storedCards.forEach(item => {
         const cardHolder = document.createElement('div');
         cardHolder.className = `card-holder ${item.card.rarity}`;
