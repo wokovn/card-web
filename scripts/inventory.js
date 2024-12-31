@@ -87,12 +87,16 @@ export async function displayInventory(totalNormal, totalRare, totalSpecial, tot
             popup.style.justifyContent = 'center';
             popup.style.alignItems = 'center';
             popup.style.zIndex = '1000';
+            popup.style.draggable = 'false';
+            popup.style.grab = 'none';
 
             const popupImage = document.createElement('img');
             popupImage.src = img.src;
             popupImage.style.width = '90%';
             popupImage.style.height = '90%';
             popupImage.style.objectFit = 'contain';
+            popupImage.style.draggable = 'false';
+            popupImage.style.pointerEvents = 'none';
 
             popup.appendChild(popupImage);
             document.body.appendChild(popup);

@@ -11,6 +11,7 @@ export function createCard(info) {
     const frontImg = document.createElement('img');
     frontImg.className = 'front-img';
     frontImg.src = `images/${info.rarity}/${info.image}` || 'images/1.png';
+    frontImg.loading = 'lazy';
     frontImg.draggable = false;
     front.appendChild(frontImg);
 

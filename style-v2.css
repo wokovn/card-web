@@ -19,16 +19,15 @@
 
   .card-container {
     position: relative;
-    margin: 50% 50%;
+    margin: 30% 50%;
     width: var(--cardWidth);
     height: var(--cardHeight);
     background-color: transparent;
     margin: 0 auto;
      /* Prevent cards from overflowing the container */
-     user-select: none;
+    user-select: none;
     perspective: 1000px; /* Add perspective for 3D transforms */
-
-}
+  }
 
 
 .scene {
@@ -669,6 +668,10 @@ body {
   position: relative;
   border-radius: 10px;
 }
+.card-holder:hover{
+  transform: translateY(-10px);
+  transition: transform 0.3s ease;
+}
 .duplicate-circle
 {
   position: absolute;
@@ -704,10 +707,9 @@ body {
     --cardWidth: 300px;
     --cardHeight: 450px;
   }
-
   .inventory
   {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -718,13 +720,14 @@ body {
     --cardHeight: 900px;
   }
 
+  
   .back-img{
     border: 20px solid transparent;
   }
 
   .inventory
   {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
  
 }
