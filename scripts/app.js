@@ -16,6 +16,8 @@ const swipeSound = [
     new Audio('sound/next-4.mp3')
 ];
 
+const legendarySfx = new Audio('sound/legendary-sfx.mp3');
+
 const rarityOrder = {
     'normal': 1,
     'rare': 2,
@@ -25,6 +27,78 @@ const rarityOrder = {
 
 let isOnCooldown = false;
 let isNextCardOnCooldown = false;
+function addEffectSpecial(front,card) {
+    card.style.animation = 'fastShake 1s ease-out 0.3s';
+    if (!front.querySelector('.reveal-cover')) {
+        const revealCoverTop = document.createElement('div');
+        revealCoverTop.className = 'reveal-cover-special reveal-cover-top-special';
+        revealCoverTop.style.overflow = 'hidden';
+        front.appendChild(revealCoverTop);
+    }
+
+    if (!front.querySelector('.reveal-cover-bottom-special')) {
+        const revealCoverBottom = document.createElement('div');
+        revealCoverBottom.className = 'reveal-cover-special reveal-cover-bottom-special';
+        revealCoverBottom.style.overflow = 'hidden';
+        front.appendChild(revealCoverBottom);
+    }
+
+    if (!card.querySelector('.reveal-glow-special')) {
+        const revealGlow = document.createElement('div');
+        revealGlow.className = 'reveal-glow-special';
+        card.appendChild(revealGlow);
+    }
+}
+function addEffectLegendary(front,card) {
+    card.style.animation = 'fastShake 1s ease-out 3 0.3s';
+    legendarySfx.currentTime = 1;
+    legendarySfx.volume = 0;
+    legendarySfx.addEventListener('canplaythrough', () => {
+        legendarySfx.play();
+        let fadeInInterval = setInterval(() => {
+            if (legendarySfx.volume < 1) {
+                legendarySfx.volume += 0.05;
+            } else {
+                clearInterval(fadeInInterval);
+            }
+        }, 100);
+    }, { once: true });
+    legendarySfx.load();
+
+    if (!front.querySelector('.reveal-cover-right-legendary')) {
+        const revealCoverTop = document.createElement('div');
+        revealCoverTop.className = 'reveal-cover-legendary reveal-cover-right-legendary';
+        revealCoverTop.style.overflow = 'hidden';
+        front.appendChild(revealCoverTop);
+    }
+
+    if (!front.querySelector('.reveal-cover-left-legendary')) {
+        const revealCoverBottom = document.createElement('div');
+        revealCoverBottom.className = 'reveal-cover-legendary reveal-cover-left-legendary';
+        revealCoverBottom.style.overflow = 'hidden';
+        front.appendChild(revealCoverBottom);
+    }
+
+    if (!front.querySelector('.reveal-cover')) {
+        const revealCoverTop = document.createElement('div');
+        revealCoverTop.className = 'reveal-cover-special reveal-cover-top-special';
+        revealCoverTop.style.overflow = 'hidden';
+        front.appendChild(revealCoverTop);
+    }
+
+    if (!front.querySelector('.reveal-cover-bottom-special')) {
+        const revealCoverBottom = document.createElement('div');
+        revealCoverBottom.className = 'reveal-cover-special reveal-cover-bottom-special';
+        revealCoverBottom.style.overflow = 'hidden';
+        front.appendChild(revealCoverBottom);
+    }
+
+    if (!card.querySelector('.reveal-glow-legendary')) {
+        const revealGlow = document.createElement('div');
+        revealGlow.className = 'reveal-glow-legendary';
+        card.appendChild(revealGlow);
+    }
+}
 
 
 function addCardEventListeners(card) {
@@ -33,6 +107,10 @@ function addCardEventListeners(card) {
     let currentX = 0;
     let currentY = 0;
     let isFlipped = true;
+    let front = card.querySelector('.card__face--front');
+    let isSpecial = front.classList.contains('special') ? true : false;
+    let isLegendary = front.classList.contains('legendary') ? true : false;
+    let addedEffect = false;
 
     card.addEventListener('mousedown', (e) => {
         if (!card.classList.contains('top')) return;
@@ -40,6 +118,15 @@ function addCardEventListeners(card) {
         startX = e.pageX - currentX;
         startY = e.pageY - currentY;
         card.style.cursor = 'grabbing';
+        if (!addedEffect && (isSpecial || isLegendary)) {
+            addedEffect = true;
+            if (isSpecial) {
+                addEffectSpecial(front,card);
+            }
+            else if (isLegendary) {
+                addEffectLegendary(front,card);
+            }
+        }
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -70,39 +157,39 @@ function addCardEventListeners(card) {
         isFlipped = !isFlipped;
         card.classList.toggle('flipped');
     });
-    
-card.addEventListener('touchstart', (e) => {
-    if (!card.classList.contains('top')) return;
-    isDragging = true;
-    startX = e.touches[0].pageX - currentX;
-    startY = e.touches[0].pageY - currentY;
-    card.style.cursor = 'grabbing';
-});
 
-document.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    currentX = e.touches[0].pageX - startX;
-    currentY = e.touches[0].pageY - startY;
-    card.style.transform = `rotateY(${currentX / 5}deg) rotateX(${-currentY / 5}deg)`;
-});
+    card.addEventListener('touchstart', (e) => {
+        if (!card.classList.contains('top')) return;
+        isDragging = true;
+        startX = e.touches[0].pageX - currentX;
+        startY = e.touches[0].pageY - currentY;
+        card.style.cursor = 'grabbing';
+    });
 
-document.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    card.style.cursor = 'grab';
-    if (!isFlipped) {
-        isFlipped = true;
-        card.classList.add('flipped');
-    }
-    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        currentX = e.touches[0].pageX - startX;
+        currentY = e.touches[0].pageY - startY;
+        card.style.transform = `rotateY(${currentX / 5}deg) rotateX(${-currentY / 5}deg)`;
+    });
 
-    // Check if swipe left
-    if (currentX < -50) {
-        nextCardButton.click();
-    }
-});
+    document.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.cursor = 'grab';
+        if (!isFlipped) {
+            isFlipped = true;
+            card.classList.add('flipped');
+        }
+        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+        if (currentX < -50) {
+            nextCardButton.click();
+        }
+    });
 }
+
 
 createCardsButton.addEventListener('click', async () => {
     if (isOnCooldown) return;

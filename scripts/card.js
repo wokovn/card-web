@@ -35,6 +35,18 @@ export function createCard(info) {
     const bottom = document.createElement('div');
     bottom.className = 'card__face card__face--bottom';
 
+    // if (true) {
+    //     const revealCoverTop = document.createElement('div');
+    //     revealCoverTop.className = 'reveal-cover reveal-cover-top';
+    //     revealCoverTop.style.overflow = 'hidden';
+    //     front.appendChild(revealCoverTop);
+
+    //     const revealCoverBottom = document.createElement('div');
+    //     revealCoverBottom.className = 'reveal-cover reveal-cover-bottom';
+    //     revealCoverBottom.style.overflow = 'hidden';
+    //     front.appendChild(revealCoverBottom);
+    // }
+
     card.appendChild(front);
     card.appendChild(back);
     card.appendChild(left);
@@ -43,6 +55,7 @@ export function createCard(info) {
     card.appendChild(bottom);
     scene.appendChild(card);
 
+    
     // Return both scene and card elements
     return { scene, card };
 }

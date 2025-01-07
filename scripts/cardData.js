@@ -7,7 +7,7 @@ export async function loadCardData(filename) {
 }
 
 
-export const NORMAL = .75;
+export const NORMAL = .7;
 export const RARE = .90;
 export const SPECIAL = .98;
 

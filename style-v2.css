@@ -24,11 +24,19 @@
     height: var(--cardHeight);
     background-color: transparent;
     margin: 0 auto;
-     /* Prevent cards from overflowing the container */
     user-select: none;
-    perspective: 1000px; /* Add perspective for 3D transforms */
+    perspective: 1000px;
   }
-
+  .effect{
+    position: absolute;
+    margin: 30% 50%;
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    background-color: white;
+    margin: 0 auto;
+    user-select: none;
+    z-index: 1;
+  }
 
 .scene {
     position: absolute;
@@ -38,6 +46,39 @@
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+
+@keyframes fastShake {
+  0%, 100% {
+    transform: translateX(0) rotate(1.5deg);
+    scale: 1;
+  }
+  12.5% {
+    transform: translateX(-3px) rotate(-1.5deg);
+    scale: 1.1;
+  }
+  25% {
+    transform: translateX(3px) rotate(1.5deg);
+  }
+  37.5% {
+    transform: translateX(-3px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateX(3px) rotate(1.5deg);
+  }
+  62.5% {
+    transform: translateX(-3px) rotate(-1.5deg);
+  }
+  75% {
+    transform: translateX(3px) rotate(1.5deg);
+    scale:1;
+  }
+  87.5% {
+    transform: translateX(-1.5px) rotate(0deg);
+  }
+  95% {
+    transform: translateX(1.5px) rotate(-0deg);
+  }
+}
 
 .scene.active {
     opacity: 1;
@@ -49,18 +90,172 @@
     transform: translateX(-100%);
 }
 
-  .card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    cursor: grab;
-    transition: transform 0.1s ease-out;
-    transition: transform 0.3s ease;
-  }
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  cursor: grab;
+  transition: transform 0.1s ease-out;
+  transition: transform 0.3s ease;
+}
 
-  .card.flipped {
-    transform: rotateY(180deg); /* Rotate 180 degrees to show back */
+.reveal-cover-special {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(45deg, #db43e3, #db43e3);
+  transform: rotate(45deg);
+  z-index: 1;
+  box-shadow: 0 0 20px #db43e3;
+}
+
+.reveal-cover-legendary {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(45deg, #ffd700, #ffd700);
+  transform: rotate(0deg);
+  z-index: 1;
+  box-shadow: 0 0 20px #ffd700;
+}
+
+.reveal-glow-special {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #db43e3, #db43e3);
+  z-index: 2;
+  box-shadow: 0 0 20px #db43e3, 0 0 40px #db43e3, 0 0 60px #db43e3;
+  opacity: 0;
+  animation: glow 1.5s infinite alternate, fadeIn 1s forwards;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #db43e3, 0 0 10px #db43e3, 0 0 15px #db43e3, 0 0 20px #db43e3;
+  }
+  50% {
+    box-shadow: 0 0 10px #db43e3, 0 0 20px #db43e3, 0 0 30px #db43e3, 0 0 40px #db43e3;
+  }
+  100% {
+    box-shadow: 0 0 5px #db43e3, 0 0 10px #db43e3, 0 0 15px #db43e3, 0 0 20px #db43e3;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-glow-legendary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #db43e3, #db43e3);
+  z-index: 2;
+  box-shadow: 0 0 20px #db43e3, 0 0 40px #db43e3, 0 0 60px #db43e3;
+  animation: changeColor 7s forwards, glow-legendary 1.5s infinite alternate 5s, fadeIn 1s forwards;
+}
+
+@keyframes changeColor {
+  to {
+    background: linear-gradient(0deg, #ffd700, #ffd700);
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #ffd700;
+  }
+}
+@keyframes glow-legendary {
+  0% {
+    box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700, 0 0 20px #ffd700;
+  }
+  50% {
+    box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700;
+  }
+  100% {
+    box-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700, 0 0 20px #ffd700;
+  }
+}
+
+
+.reveal-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.2) 50%,
+      rgba(255,255,255,0) 100%);
+  animation: sweep 0.3s ease-out 0.8s forwards;
+}
+
+.reveal-cover-top-special {
+  top: -50%;
+  right: -25%;
+  transform-origin: bottom left;
+  animation: slideTopOut 0.8s cubic-bezier(0.45, 0, 0.55, 1) 1s forwards;
+}
+
+.reveal-cover-bottom-special {
+  bottom: -50%;
+  left: -25%;
+  transform-origin: top right;
+  animation: slideBottomOut 0.8s cubic-bezier(0.45, 0, 0.55, 1) 1s forwards;
+}
+
+.reveal-cover-left-legendary {
+  top: -25%;
+  right: -25%;
+  transform-origin: bottom left;
+  animation: slideLeftOut 1s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
+}
+
+.reveal-cover-right-legendary {
+  bottom: -25%;
+  left: -25%;
+  transform-origin: top right;
+  animation: slideRightOut 1s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
+}
+
+
+@keyframes slideTopOut {
+  to {
+      transform: rotate(45deg) translateX(150%);
+      box-shadow: 0 0 40px rgba(37, 99, 235, 0.8);
+  }
+}
+
+@keyframes slideBottomOut {
+  to {
+      transform: rotate(45deg) translateX(-150%);
+      box-shadow: 0 0 40px rgba(37, 99, 235, 0.8);
+  }
+}
+
+@keyframes slideLeftOut {
+  to {
+      transform:translateX(150%);
+      box-shadow: 0 0 40px rgba(37, 99, 235, 0.8);
+  }
+}
+
+@keyframes slideRightOut {
+  to {
+      transform:translateX(-150%);
+      box-shadow: 0 0 40px rgba(37, 99, 235, 0.8);
+  }
+}
+
+@keyframes sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+.card.flipped {
+  transform: rotateY(180deg); /* Rotate 180 degrees to show back */
 }
 
   .card:active {
@@ -162,8 +357,6 @@
     bottom: 0;
     border-radius: 0 0 10px 10px;
   }
-  
-  
 
   /* Hiệu ứng holographic */
   /* .card__face--front::before {
