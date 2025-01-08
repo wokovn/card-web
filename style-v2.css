@@ -211,14 +211,14 @@
   top: -25%;
   right: -25%;
   transform-origin: bottom left;
-  animation: slideLeftOut 1s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
+  animation: slideLeftOut 1.5s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
 }
 
 .reveal-cover-right-legendary {
   bottom: -25%;
   left: -25%;
   transform-origin: top right;
-  animation: slideRightOut 1s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
+  animation: slideRightOut 1.5s cubic-bezier(0.45, 0, 0.55, 1) 1.5s forwards;
 }
 
 

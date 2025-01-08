@@ -51,7 +51,7 @@ function addEffectSpecial(front,card) {
 }
 function addEffectLegendary(front,card) {
     card.style.animation = 'fastShake 1s ease-out 3 0.3s';
-    legendarySfx.currentTime = 1;
+    legendarySfx.currentTime = 0.7;
     legendarySfx.volume = 0;
     legendarySfx.addEventListener('canplaythrough', () => {
         legendarySfx.play();
@@ -135,6 +135,21 @@ function addCardEventListeners(card) {
         currentX = e.pageX - startX;
         currentY = e.pageY - startY;
         card.style.transform = `rotateY(${currentX / 5}deg) rotateX(${-currentY / 5}deg)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.cursor = 'grab';
+        if (!isFlipped) {
+            isFlipped = true;
+            card.classList.add('flipped');
+        }
+        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+        if (currentX < -50) {
+            nextCardButton.click();
+        }
     });
 
     document.addEventListener('mouseup', () => {

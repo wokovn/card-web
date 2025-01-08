@@ -4,5 +4,8 @@
     { "id": "DRM_uremon", "rarity": "rare", "name": "", "image": "DRM_uremon.webp" },
     { "id": "DRM_sunelinh", "rarity": "rare", "name": "", "image": "DRM_sunelinh.webp" },
     { "id": "DRM_taikeysugi", "rarity": "rare", "name": "", "image": "DRM_taikeysugi.webp" },
-    { "id": "DRM_chaibo", "rarity": "rare", "name": "", "image": "DRM_chaibo.webp" }
+    { "id": "DRM_chaibo", "rarity": "rare", "name": "", "image": "DRM_chaibo.webp" },
+    { "id": "Rambo-2019", "rarity": "rare", "name": "", "image": "rambo-2019.webp" },
+    { "id": "tham-tu-haki", "rarity": "rare", "name": "", "image": "tham-tu-haki.webp" },
+    { "id": "bo-heo", "rarity": "rare", "name": "", "image": "bo-heo.webp" }
 ]
