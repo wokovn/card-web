@@ -7,5 +7,6 @@
     { "id": "DRM_chaibo", "rarity": "rare", "name": "", "image": "DRM_chaibo.webp" },
     { "id": "Rambo-2019", "rarity": "rare", "name": "", "image": "rambo-2019.webp" },
     { "id": "tham-tu-haki", "rarity": "rare", "name": "", "image": "tham-tu-haki.webp" },
-    { "id": "bo-heo", "rarity": "rare", "name": "", "image": "bo-heo.webp" }
+    { "id": "bo-heo", "rarity": "rare", "name": "", "image": "bo-heo.webp" },
+    { "id": "alvibo", "rarity": "rare", "name": "", "image": "alvibo.webp" }
 ]

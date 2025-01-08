@@ -2,5 +2,9 @@
     { "id": "4000m", "rarity": "special", "name": "", "image": "4000m.webp" },
     { "id": "voiper", "rarity": "special", "name": "", "image": "voiper.webp" },
     { "id": "mixicup-mixi", "rarity": "special", "name": "", "image": "mixicup-mixi.webp" },
-    { "id": "mixicup-nhism", "rarity": "special", "name": "", "image": "mixicup-nhism.webp" }
+    { "id": "mixicup-nhism", "rarity": "special", "name": "", "image": "mixicup-nhism.webp" },
+    { "id": "OP_UsoNT", "rarity": "special", "name": "", "image": "OP_UsoNT.webp" },
+    { "id": "OP_roronoa-aben", "rarity": "special", "name": "", "image": "OP_roronoa-aben.webp" },
+    { "id": "OP_hoa-tieu-nhi-dam", "rarity": "special", "name": "", "image": "OP_hoa-tieu-nhi-dam.webp" },
+    { "id": "OP_sanky", "rarity": "special", "name": "", "image": "OP_sanky.webp" }
 ]

@@ -62,7 +62,8 @@ export async function displayInventory(totalNormal, totalRare, totalSpecial, tot
     storedCards.sort((a, b) => a.card.id.localeCompare(b.card.id));
     storedCards.forEach(item => {
         const cardHolder = document.createElement('div');
-        cardHolder.className = `card-holder ${item.card.rarity}`;
+        //cardHolder.className = `card-holder ${item.card.rarity}`;
+        cardHolder.className = `card-holder`;
 
         const img = document.createElement('img');
         img.src = `images/${item.card.rarity}/${item.card.image}` || 'images/1.png';
