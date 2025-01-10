@@ -6,5 +6,6 @@
     { "id": "OP_UsoNT", "rarity": "special", "name": "", "image": "OP_UsoNT.webp" },
     { "id": "OP_roronoa-aben", "rarity": "special", "name": "", "image": "OP_roronoa-aben.webp" },
     { "id": "OP_hoa-tieu-nhi-dam", "rarity": "special", "name": "", "image": "OP_hoa-tieu-nhi-dam.webp" },
-    { "id": "OP_sanky", "rarity": "special", "name": "", "image": "OP_sanky.webp" }
+    { "id": "OP_sanky", "rarity": "special", "name": "", "image": "OP_sanky.webp" },
+    { "id": "OP_monkeyddoly", "rarity": "special", "name": "", "image": "OP_monkeyddoly.webp" }
 ]
