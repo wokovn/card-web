@@ -241,20 +241,31 @@ createCardsButton.addEventListener('click', async () => {
 });
 
 function positionCards() {
-    const offset = 30;
+    const offset = 35;
     cardsElements.forEach((scene, index) => {
-        scene.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+        scene.style.transition = 'transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease';
         scene.style.opacity = 1;
         scene.classList.remove('top');
+        
         if (index === currentCardIndex) {
             scene.classList.add('top');
         }
+        
         if (index <= currentCardIndex) {
-            scene.style.transform = `translateY(${index * offset}px)`;
+            const depth = currentCardIndex - index;
+            scene.style.transform = `translateY(${index * offset}px) translateX(${depth * 2}px)`;
             scene.style.zIndex = cardsElements.length - index;
+            
+            // Add progressive shadow depth
+            if (depth === 0) {
+                scene.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.2), 0 16px 32px rgba(0, 0, 0, 0.15)';
+            } else {
+                scene.style.boxShadow = `0 ${4 + depth * 2}px ${8 + depth * 4}px rgba(0, 0, 0, ${0.1 + depth * 0.05})`;
+            }
         } else {
             scene.style.transform = `translateX(${currentCardIndex * offset + offset}px)`;
             scene.style.zIndex = 0;
+            scene.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
         }
     });
 
@@ -336,11 +347,11 @@ const closePopup = document.querySelector('.inventory-popup .close');
 const inventoryButton = document.getElementById('inventoryButton');
 
 function openInventory() {
-    inventoryPopup.style.display = 'block';
+    inventoryPopup.classList.add('show');
 }
 
 function closeInventory() {
-    inventoryPopup.style.display = 'none';
+    inventoryPopup.classList.remove('show');
 }
 
 inventoryButton.addEventListener('click', () => {
@@ -349,6 +360,20 @@ inventoryButton.addEventListener('click', () => {
 });
 
 closePopup.addEventListener('click', closeInventory);
+
+// Close inventory when clicking outside the content
+inventoryPopup.addEventListener('click', (e) => {
+    if (e.target === inventoryPopup) {
+        closeInventory();
+    }
+});
+
+// Close inventory with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && inventoryPopup.classList.contains('show')) {
+        closeInventory();
+    }
+});
 
 document.querySelector('.ClearInventory').addEventListener('click', function () {
     localStorage.removeItem('cardsCollection');

@@ -7,9 +7,10 @@ export async function loadCardData(filename) {
 }
 
 
-export const NORMAL = .75;
-export const RARE = .95;
-export const SPECIAL = .98;
+export const NORMAL = .5; 
+export const RARE = .85;    
+export const SPECIAL = .95; 
+                            // Legendary: 5% (0.95 to 1.0)
 
 export const rarityOrder = {
     'normal': 1,

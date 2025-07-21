@@ -1,72 +1,109 @@
 <!DOCTYPE html>
-<!-- v2 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Card Collection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Mystical Trading Card Collection - Collect, trade and discover rare cards">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Card Collection - Mystical Trading Cards</title>
     <link rel="stylesheet" href="style-v2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class = "inventory-popup">
-        <div class = "inventory-popup-content">
-            <span class="close" style="cursor: pointer; display: inline;">&times;</span>
-            <h2 class="inventory-section" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); text-align: center;">
-                Inventory
-            </h2>
-            <button class="ClearInventory" style="position: fixed; top: 10; left: 90%; transform: translateX(-50%); text-align: center;">
-                Clear Inventory
-            </button>
-            <script>
-                document.querySelector('ClearInventory').addEventListener('click', function() {
-                    localStorage.removeItem('cardsCollection');
-                    alert('Inventory cleared!');
-                });
-            </script>
-            <div class = "inventory-popup-content-inner">
-                <div class = "normal-cards">
-                    <h3 class = "inventory-text normal-section">Normal Cards</h3>
-                    <div class = "inventory normal-holder">
-
-                    </div>
-
+    <!-- Inventory Modal -->
+    <div class="inventory-popup">
+        <div class="inventory-popup-content">
+            <div class="inventory-header">
+                <div class="inventory-title-section">
+                    <h2 class="inventory-title">
+                        <span class="title-icon">🎴</span>
+                        Card Collection
+                        <span class="title-accent">Inventory</span>
+                    </h2>
                 </div>
-                <div class = "rare-cards">
-                    <h3 class = "inventory-text rare-section">Rare Cards</h3>
-                    <div class = "inventory rare-holder">
-
-                    </div>
+                <div class="inventory-controls">
+                    <button class="ClearInventory clear-inventory-btn">
+                        <span class="btn-icon">🗑️</span>
+                        Clear All
+                    </button>
+                    <span class="close close-btn">
+                        <span class="close-icon">×</span>
+                    </span>
                 </div>
-                <div class = "special-cards">
-                    <h3 class = "inventory-text special-section">Special Cards</h3>
-                    <div class = "inventory special-holder">
-
-                    </div>
+            </div>
+            <div class="inventory-popup-content-inner">
+                <div class="cards-section normal-cards">
+                    <h3 class="section-title normal-section">
+                        <span class="rarity-icon">⚡</span>
+                        Normal Cards
+                        <span class="card-count" id="normal-count">0</span>
+                    </h3>
+                    <div class="inventory normal-holder"></div>
                 </div>
-                <div class = "legendary-cards ">
-                    <h3 class = "inventory-text legendary-section">Legendary Cards</h3>
-                    <div class = "inventory legendary-holder">
-
-                    </div>
+                
+                <div class="cards-section rare-cards">
+                    <h3 class="section-title rare-section">
+                        <span class="rarity-icon">💎</span>
+                        Rare Cards
+                        <span class="card-count" id="rare-count">0</span>
+                    </h3>
+                    <div class="inventory rare-holder"></div>
+                </div>
+                
+                <div class="cards-section special-cards">
+                    <h3 class="section-title special-section">
+                        <span class="rarity-icon">✨</span>
+                        Special Cards
+                        <span class="card-count" id="special-count">0</span>
+                    </h3>
+                    <div class="inventory special-holder"></div>
+                </div>
+                
+                <div class="cards-section legendary-cards">
+                    <h3 class="section-title legendary-section">
+                        <span class="rarity-icon">👑</span>
+                        Legendary Cards
+                        <span class="card-count" id="legendary-count">0</span>
+                    </h3>
+                    <div class="inventory legendary-holder"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <main>
-        <section id="gallery" class="section">
-            
-            <div class="card-container"></div>
-        </div>
+    <!-- Main Gallery -->
+    <main class="main-content">
+        <section id="gallery" class="gallery-section">
+            <div class="gallery-background">
+                <div class="floating-particles"></div>
+            </div>
+            <div class="card-container">
+                <div class="card-glow-effect"></div>
+            </div>
         </section>
     </main>
 
-    <div class="menu-bar">
-        <div class = 'menu-grid'>
-            <button id="inventoryButton">INVENTORY</button>
-            <button id="createCards">OPEN PACK</button>
-            <button id="nextCard">NEXT CARD</button>
+    <!-- Navigation Menu -->
+    <nav class="menu-bar">
+        <div class="menu-grid">
+            <button id="inventoryButton" class="menu-button inventory-btn">
+                <span class="btn-icon">📦</span>
+                <span class="btn-text">INVENTORY</span>
+                <div class="btn-glow"></div>
+            </button>
+            <button id="createCards" class="menu-button pack-btn">
+                <span class="btn-icon">🎁</span>
+                <span class="btn-text">OPEN PACK</span>
+                <div class="btn-glow"></div>
+            </button>
+            <button id="nextCard" class="menu-button next-btn">
+                <span class="btn-icon">➡️</span>
+                <span class="btn-text">NEXT CARD</span>
+                <div class="btn-glow"></div>
+            </button>
         </div>
-    </div>
+    </nav>
 
     <script src="scripts/app.js" type="module"></script>
 </body>
