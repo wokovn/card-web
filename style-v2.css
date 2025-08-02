@@ -62,6 +62,78 @@ body {
   -webkit-touch-callout: none;
 }
 
+/* ===== HELP BUTTON STYLES ===== */
+.help-button-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+}
+
+.help-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  border: 2px solid var(--accent-color);
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.help-button:hover {
+  background: linear-gradient(145deg, #34495e, #3c5a78);
+  box-shadow: 0 6px 20px rgba(79, 179, 217, 0.4);
+  transform: translateY(-2px);
+}
+
+.help-tooltip {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  background: rgba(20, 20, 40, 0.95);
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 15px;
+  min-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.help-button:hover + .help-tooltip,
+.help-tooltip:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltip-content p {
+  color: var(--text-primary);
+  font-size: 14px;
+  margin: 8px 0;
+  font-family: var(--font-secondary);
+  line-height: 1.4;
+}
+
+.tooltip-content p:first-child {
+  margin-top: 0;
+}
+
+.tooltip-content p:last-child {
+  margin-bottom: 0;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -1663,6 +1735,26 @@ body {
   :root {
     --cardWidth: 240px;
     --cardHeight: 360px;
+  }
+  
+  .help-button-container {
+    top: 15px;
+    left: 15px;
+  }
+  
+  .help-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .help-tooltip {
+    min-width: 260px;
+    padding: 12px;
+  }
+  
+  .tooltip-content p {
+    font-size: 13px;
   }
   
   .inventory {
