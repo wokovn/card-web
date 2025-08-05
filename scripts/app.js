@@ -57,7 +57,7 @@ function addEffectLegendary(front,card) {
         legendarySfx.play();
         let fadeInInterval = setInterval(() => {
             if (legendarySfx.volume < 1) {
-                legendarySfx.volume += 0.05;
+                legendarySfx.volume = Math.min(1, legendarySfx.volume + 0.05);
             } else {
                 clearInterval(fadeInInterval);
             }
