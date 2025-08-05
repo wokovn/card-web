@@ -53,16 +53,30 @@ function addEffectLegendary(front,card) {
     card.style.animation = 'fastShake 1s ease-out 3 0.3s';
     legendarySfx.currentTime = 0.7;
     legendarySfx.volume = 0;
-    legendarySfx.addEventListener('canplaythrough', () => {
+    
+    // Remove any existing event listeners to prevent multiple calls
+    legendarySfx.removeEventListener('canplaythrough', handleLegendaryFade);
+    
+    function handleLegendaryFade() {
         legendarySfx.play();
-        let fadeInInterval = setInterval(() => {
-            if (legendarySfx.volume < 1) {
-                legendarySfx.volume = Math.min(1, legendarySfx.volume + 0.05);
-            } else {
+        let currentVolume = 0;
+        const targetVolume = 1;
+        const fadeStep = 0.04; // Smaller step for smoother fade
+        const fadeInterval = 80; // Slightly faster interval
+        
+        const fadeInInterval = setInterval(() => {
+            currentVolume += fadeStep;
+            if (currentVolume >= targetVolume) {
+                currentVolume = targetVolume; // Ensure exact value
+                legendarySfx.volume = currentVolume;
                 clearInterval(fadeInInterval);
+            } else {
+                legendarySfx.volume = currentVolume;
             }
-        }, 100);
-    }, { once: true });
+        }, fadeInterval);
+    }
+    
+    legendarySfx.addEventListener('canplaythrough', handleLegendaryFade, { once: true });
     legendarySfx.load();
 
     if (!front.querySelector('.reveal-cover-right-legendary')) {
